@@ -3,7 +3,7 @@ import {SOURCE_EMAIL,SOURCE_PASS} from "../lib/env/index"
 
 interface MailConf{
   text:string, // text content
-  html:string, // html 
+  html:string|null, // html 
   to:string, //reciever
   subject:string// title
 }
@@ -21,7 +21,7 @@ const mail = nodemailer.createTransport({
     }
 })
 
-const runEmail = async (Content:MailConf)=>{
+export const runEmail = async (Content:MailConf)=>{
   const {html,subject,text,to} = Content;
   const ps = await mail.sendMail({
     from:SOURCE_EMAIL,text,to,subject
